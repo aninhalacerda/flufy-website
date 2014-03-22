@@ -1,12 +1,3 @@
-GIT
-  remote: git://github.com/sinatra/sinatra.git
-  revision: f8abf619a42129abd336f9a6ebe3f689022c76aa
-  specs:
-    sinatra (1.4.4)
-      rack (~> 1.4)
-      rack-protection (~> 1.4)
-      tilt (~> 1.3, >= 1.3.4)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -69,6 +60,10 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.2)
       rack
+    sinatra (1.4.4)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
     slim (2.0.2)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
@@ -85,6 +80,6 @@ DEPENDENCIES
   data_mapper
   dm-sqlite-adapter
   rack
-  sinatra!
+  sinatra
   slim
   sqlite3
