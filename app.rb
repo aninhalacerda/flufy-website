@@ -3,6 +3,7 @@ require 'sinatra'
 require 'slim'
 require 'data_mapper'
 
+#datamapper ---- models
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
 
 class Task
@@ -10,16 +11,41 @@ class Task
   property :id,           Serial
   property :name,         String, :required => true
   property :completed_at, DateTime
+  belongs_to :list
+end
+ 
+class List
+  include DataMapper::Resource
+  property :id,           Serial
+  property :name,         String, :required => true
+  has n, :tasks, :constraint => :destroy 
 end
 DataMapper.finalize
+# ------------------------------
+
 
 get '/' do
-  @tasks = Task.all
+  @lists = List.all(:order => [:name])
   slim :index
 end
 
-post '/' do
-  Task.create  params[:task]
+#post para criar Task
+post '/:id' do
+  List.get(params[:id]).tasks.create params['task']
+  redirect to('/')
+end
+
+#post para criar Lista
+post '/new/list' do
+  List.create params['list']
+  redirect to('/')
+end
+
+#out: completar tasks
+put '/task/:id' do
+  task = Task.get params[:id]
+  task.completed_at = task.completed_at.nil? ? Time.now : nil
+  task.save
   redirect to('/')
 end
 
@@ -28,14 +54,7 @@ delete '/task/:id' do
   redirect to('/')
 end
 
-get '/:task' do
-  @task = params[:task].split('-').join(' ').capitalize
-  slim :task
-end
-
-put '/task/:id' do
-  task = Task.get params[:id]
-  task.completed_at = task.completed_at.nil? ? Time.now : nil
-  task.save
+delete '/list/:id' do
+  List.get(params[:id]).destroy
   redirect to('/')
 end
