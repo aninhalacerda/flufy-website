@@ -5,4 +5,7 @@ gem 'slim'
 gem 'rack'
 gem 'data_mapper'
 gem 'dm-sqlite-adapter'
-gem 'sqlite3'
+
+group :development, :test do
+  gem 'sqlite3'
+end
