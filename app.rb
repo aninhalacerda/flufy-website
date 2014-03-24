@@ -4,7 +4,7 @@ require 'slim'
 require 'data_mapper'
 
 #datamapper ---- models
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
+DataMapper.setup(:default, 'mysql://flufyuser:d4t4!flufy@localhost/flufy_db')
 
 class Task
   include DataMapper::Resource

@@ -4,8 +4,5 @@ gem 'sinatra'
 gem 'slim'
 gem 'rack'
 gem 'data_mapper'
-
-group :development, :test do
-  gem 'sqlite3'
-  gem 'dm-sqlite-adapter'
-end
+gem 'mysql2'
+gem 'dm-mysql-adapter'
