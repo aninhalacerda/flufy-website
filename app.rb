@@ -21,6 +21,8 @@ class List
   has n, :tasks, :constraint => :destroy 
 end
 DataMapper.finalize
+DataMapper.auto_upgrade!
+
 # ------------------------------
 
 
